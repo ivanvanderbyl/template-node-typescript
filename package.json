@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
+    "start": "node index.js",
     "build:watch": "tsc -w",
     "dev": "ts-node ./index.ts",
     "debug": "ts-node --inspect-brk ./index.ts"
