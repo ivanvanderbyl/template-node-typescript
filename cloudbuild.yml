@@ -1,25 +1,25 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-app', '.']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['tag', 'gcr.io/$PROJECT_ID/my-app', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA']
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/my-app:latest']
-  - name: 'gcr.io/cloud-builders/gcloud'
+  - name: "gcr.io/kaniko-project/executor:latest"
+    args:
+      - --destination=gcr.io/$PROJECT_ID/<REPLACEWITHPROJECTNAME>:$SHORT_SHA
+      - --cache=true
+      - --cache-ttl=720h
+  - name: "gcr.io/cloud-builders/gcloud"
     args:
       [
-        'run',
-        'deploy',
-        'my-app',
-        '--image',
-        'gcr.io/$PROJECT_ID/my-app:$SHORT_SHA',
-        '--region',
-        'us-central1',
-        '--platform',
-        'managed',
-        '--quiet',
+        "beta",
+        "run",
+        "deploy",
+        "<REPLACEWITHPROJECTNAME>",
+        "--image",
+        "gcr.io/$PROJECT_ID/<REPLACEWITHPROJECTNAME>:$SHORT_SHA",
+        "--region",
+        "us-central1",
+        "--platform",
+        "managed",
+        "--quiet",
       ]
-images:
-  - gcr.io/$PROJECT_ID/my-app
+
+timeout: 1800s
+options:
+  machineType: "N1_HIGHCPU_8"
