@@ -18,28 +18,14 @@
     },
     {
       "type": "node",
+      "name": "vscode-jest-tests",
       "request": "launch",
-      "name": "Mocha All",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": [
-        "--colors",
-        "-r",
-        "ts-node/register",
-        "'${workspaceFolder}/{,!(node_modules)/}*/*.spec.ts'"
-      ],
-      "skipFiles": ["<node_internals>/**"],
+      "args": ["--runInBand"],
+      "cwd": "${workspaceFolder}",
       "console": "internalConsole",
-      "internalConsoleOptions": "neverOpen"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Mocha Current File",
-      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-      "args": ["--colors", "-r", "ts-node/register", "${file}"],
-      "console": "internalConsole",
-      "skipFiles": ["<node_internals>/**"],
-      "internalConsoleOptions": "openOnFirstSessionStart"
+      "internalConsoleOptions": "openOnFirstSessionStart",
+      "disableOptimisticBPs": true,
+      "program": "${workspaceFolder}/node_modules/jest/bin/jest"
     }
   ]
 }
