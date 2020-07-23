@@ -1,25 +1,23 @@
 steps:
-  - name: "gcr.io/kaniko-project/executor:latest"
+  - name: 'gcr.io/kaniko-project/executor:latest'
     args:
       - --destination=gcr.io/$PROJECT_ID/<REPLACEWITHPROJECTNAME>:$SHORT_SHA
       - --cache=true
       - --cache-ttl=720h
-  - name: "gcr.io/cloud-builders/gcloud"
+  - name: 'gcr.io/cloud-builders/gcloud'
     args:
       [
-        "beta",
-        "run",
-        "deploy",
-        "<REPLACEWITHPROJECTNAME>",
-        "--image",
-        "gcr.io/$PROJECT_ID/<REPLACEWITHPROJECTNAME>:$SHORT_SHA",
-        "--region",
-        "us-central1",
-        "--platform",
-        "managed",
-        "--quiet",
+        'beta',
+        'run',
+        'deploy',
+        '<REPLACEWITHPROJECTNAME>',
+        '--image',
+        'gcr.io/$PROJECT_ID/<REPLACEWITHPROJECTNAME>:$SHORT_SHA',
+        '--region',
+        'us-central1',
+        '--platform',
+        'managed',
+        '--quiet',
       ]
 
 timeout: 1800s
-options:
-  machineType: "N1_HIGHCPU_8"
